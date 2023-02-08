@@ -9,15 +9,17 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   empleado: any = [];
-  constructor(public dashboardService: DashboardService, public router:Router) {}
+  constructor(
+    public dashboardService: DashboardService,
+    public router: Router
+  ) {}
 
   ngOnInit(): void {
-   
-    if(this.dashboardService.getId()!=null) {
-      this.router.navigate(['/Dashboard'])
+    if (this.dashboardService.getId() != null) {
+      this.router.navigate(['/Dashboard']);
       this.getEmpleados();
-    }else{
-      this.router.navigate(['/'])
+    } else {
+      this.router.navigate(['/']);
     }
   }
 
@@ -34,8 +36,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.deleteEmpleado(id).subscribe(
       (res) => {
         console.log(res);
-        alert(
-          'USTED ACABA DE ELIMINAR AL EMPLEADO NUMERO: ' +id  );
+        alert('USTED ACABA DE ELIMINAR AL EMPLEADO NUMERO: ' + id);
 
         this.getEmpleados();
       },
@@ -43,9 +44,8 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  cerrarSesion(){
+  cerrarSesion() {
     localStorage.removeItem('id');
   }
-
 }
 //401

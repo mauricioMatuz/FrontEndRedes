@@ -28,12 +28,11 @@ export class FormEmpleadosComponent implements OnInit {
     private DashboardService: DashboardService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
     const params = this.activatedRoute.snapshot.params;
     if (params.id) {
-
       this.DashboardService.getEmpleado(params.id).subscribe(
         (res) => {
           this.id = params.id;
@@ -58,53 +57,69 @@ export class FormEmpleadosComponent implements OnInit {
   salvarEmpleado() {
     const data = new FormData();
     data.append('imagen', this.imagenes);
-    const nombrecito = this.nombre
-    const apellidito = this.apellido
-    const telefonito = this.telefono
+    const nombrecito = this.nombre;
+    const apellidito = this.apellido;
+    const telefonito = this.telefono;
 
-
-    if (nombrecito.length == 0 || apellidito.length == 0 || telefonito.length == 0) {
+    if (
+      nombrecito.length == 0 ||
+      apellidito.length == 0 ||
+      telefonito.length == 0
+    ) {
       alert('DATOS VACIOS POR FAVOR LLENE LOS DATOS');
     } else {
-     if (data.get('imagen').length == 9) {
-        console.log(data.get('imagen').length + 'ESTE ES EL LEGNT');
-        alert('NO SUBIO IMAGEN SE GUARDARA CON UNA IMAGEN POR DEFECTO');
-      }
-      this.DashboardService
-      .saveEmpleado(nombrecito,apellidito,telefonito,data).subscribe(
+      //  if (data.get('imagen').length == 9) {
+      //     console.log(data.get('imagen').length + 'ESTE ES EL LEGNT');
+      //     alert('NO SUBIO IMAGEN SE GUARDARA CON UNA IMAGEN POR DEFECTO');
+      //   }
+      this.DashboardService.saveEmpleado(
+        nombrecito,
+        apellidito,
+        telefonito,
+        data
+      ).subscribe(
         (res) => {
           console.log(res);
           this.router.navigate(['/Dashboard']);
-          alert('DATOS GUARDADOS')
+          alert('DATOS GUARDADOS');
         },
         (err) => console.log(err)
       );
     }
-
   }
 
   updateEmpleado() {
     const data = new FormData();
     data.append('imagen', this.imagenes);
-    const nombrecito = this.nombre
-    const apellidito = this.apellido 
-    const telefonito = this.telefono 
+    const nombrecito = this.nombre;
+    const apellidito = this.apellido;
+    const telefonito = this.telefono;
     delete this.empleados.created_at;
-   if (nombrecito.length == 0 || apellidito.length == 0 || telefonito.length == 0) {
+    if (
+      nombrecito.length == 0 ||
+      apellidito.length == 0 ||
+      telefonito.length == 0
+    ) {
       alert('DATOS VACIOS POR FAVOR LLENE LOS DATOS');
     } else {
-       if (data.get('imagen').length == 9) {
-        console.log(data.get('imagen').length + 'ESTE ES EL LEGNT');
-        alert('NO SUBIO IMAGEN SE GUARDARA CON UNA IMAGEN POR DEFECTO');
-      }
-    this.DashboardService.updateEmpleado(this.id, nombrecito, apellidito, telefonito, data).subscribe(
-      (res) => {
-        console.log(res);
-        this.router.navigate(['/Dashboard']);
-        alert('DATOS GUARDADOS');
-      },
-      (err) => console.error(err)
-    );
+      //  if (data.get('imagen').length == 9) {
+      //   console.log(data.get('imagen').length + 'ESTE ES EL LEGNT');
+      //   alert('NO SUBIO IMAGEN SE GUARDARA CON UNA IMAGEN POR DEFECTO');
+      // }
+      this.DashboardService.updateEmpleado(
+        this.id,
+        nombrecito,
+        apellidito,
+        telefonito,
+        data
+      ).subscribe(
+        (res) => {
+          console.log(res);
+          this.router.navigate(['/Dashboard']);
+          alert('DATOS GUARDADOS');
+        },
+        (err) => console.error(err)
+      );
     }
   }
 }

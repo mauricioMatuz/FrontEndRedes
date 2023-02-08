@@ -2,7 +2,7 @@ import { Injectable, ɵConsole } from '@angular/core';
 //para leer el http
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Emplear } from '../app/models/empleado'
+import { Emplear } from '../app/models/empleado';
 //import { url } from 'inspector';
 
 @Injectable({
@@ -19,14 +19,14 @@ export class DashboardService {
   empleados = 'http://redesequipo.ddns.net:8080/api';
 
   getEmpleados() {
-    this.id = this.http.get(`${this.empleados}/empleado`)
-    console.log(this.id+ "  EN ANGULAR ID");
-    localStorage.setItem("id",this.id);
+    this.id = this.http.get(`http://localhost:8080/api/usuario`);
+    console.log(this.id + '  EN ANGULAR ID');
+    localStorage.setItem('id', this.id);
     return this.id;
   }
 
   getId() {
-    return localStorage.getItem("id");
+    return localStorage.getItem('id');
   }
 
   getEmpleado(id: string): Observable<any> {
